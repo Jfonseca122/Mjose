@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensajes Especiales para María José</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            color: #7a1c3f;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        header {
+            padding: 20px 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(122, 28, 63, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            color: #d81b60;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #880e4f;
+        }
+        
+        .photo-section {
+            margin: 20px auto;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(122, 28, 63, 0.2);
+            max-width: 500px;
+        }
+        
+        .photo-section h2 {
+            margin-bottom: 15px;
+            color: #d81b60;
+        }
+        
+        .photo-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #ff4081;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #f8bbd9;
+        }
+        
+        .photo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .photo-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #880e4f;
+            font-size: 0.9rem;
+            background-color: #f8bbd9;
+        }
+        
+        .photo-fallback i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #ff4081;
+        }
+        
+        .love-message {
+            font-size: 1.4rem;
+            font-style: italic;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 10px rgba(122, 28, 63, 0.2);
+            transition: all 0.5s ease;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .controls {
+            margin: 20px 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(122, 28, 63, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .controls p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        button {
+            background-color: #d81b60;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(216, 27, 96, 0.3);
+            width: 100%;
+        }
+        
+        button:hover {
+            background-color: #ad1457;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(216, 27, 96, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            pointer-events: none;
+            filter: drop-shadow(0 0 8px rgba(255, 20, 147, 0.7));
+            opacity: 0.9;
+            transition: transform 0.2s ease;
+            z-index: 1000;
+        }
+        
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 32px;
+            background-color: #ff4081;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .heart::before {
+            left: 20px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        
+        .heart-message {
+            position: absolute;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-align: center;
+            width: 80px;
+            margin-left: -20px;
+            margin-top: 45px;
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            z-index: 1001;
+        }
+        
+        .heart-with-photo {
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .heart-photo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            z-index: 3;
+            border: 2px solid white;
+        }
+        
+        footer {
+            margin-top: 25px;
+            padding: 15px;
+            color: #880e4f;
+            font-size: 0.8rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            display: inline-block;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            header {
+                padding: 30px 0;
+                border-radius: 20px;
+                margin-bottom: 30px;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .photo-section {
+                padding: 20px;
+                max-width: 600px;
+            }
+            
+            .photo-container {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .love-message {
+                font-size: 1.8rem;
+                padding: 20px;
+                border-radius: 15px;
+                margin: 30px auto;
+                min-height: 100px;
+            }
+            
+            .controls {
+                padding: 20px;
+                border-radius: 15px;
+                max-width: 600px;
+            }
+            
+            .buttons-container {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            button {
+                width: auto;
+                min-width: 180px;
+                margin: 0 5px;
+            }
+            
+            footer {
+                padding: 20px;
+                border-radius: 15px;
+                max-width: 600px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <div class="container">
+        <header>
+            <h1>💖 Para María José 💖</h1>
+            <p class="subtitle">Mensajes especiales con todo mi cariño</p>
+        </header>
+        
+        <main>
+            <div class="photo-section">
+                <h2>Tu foto especial</h2>
+                <div class="photo-container" id="photoContainer">
+                    <!-- La imagen se cargará desde mjose.jpeg en la misma carpeta -->
+                    <img id="photoImage" src="./mjose.jpeg" class="photo-image" alt="Foto de María José" 
+                         onerror="document.getElementById('photoFallback').style.display='flex';">
+                    <div id="photoFallback" class="photo-fallback" style="display:none;">
+                        <i>📷</i>
+                        <span>María José</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="love-message" id="mainMessage">
+                Eres una mujer increíble y mereces toda la felicidad del mundo.
+            </div>
+            
+            <div class="controls">
+                <p>Haz clic en los botones para interactuar:</p>
+                <div class="buttons-container">
+                    <button id="addHeartsBtn">Más corazones</button>
+                    <button id="changeMessageBtn">Nuevo mensaje</button>
+                    <button id="explodeHeartsBtn">¡Explosión de cariño!</button>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Hecho con cariño para ti, María José. Eres especial 💕</p>
+        </footer>
+    </div>
+
+    <script>
+        // Array de mensajes de cariño y aliento (sin "te amo")
+        const messages = [
+            "Eres una mujer increíble",
+            "Tu sonrisa ilumina el día",
+            "Eres fuerte y capaz",
+            "Mereces todo lo mejor",
+            "Eres especial y única",
+            "Tu energía es contagiosa",
+            "Eres inteligente y sabia",
+            "Admiro tu fortaleza",
+            "Tu corazón es generoso",
+            "Eres suficiente tal como eres",
+            "Hoy será un gran día para ti",
+            "Todo saldrá bien, confía",
+            "Eres valiosa e importante",
+            "Tu presencia hace la diferencia",
+            "Gracias por ser como eres",
+            "Eres una persona maravillosa",
+            "Tu bondad inspira a otros",
+            "Eres capaz de lograr lo que te propongas",
+            "Tu luz brilla con intensidad",
+            "Eres admirada y respetada"
+        ];
+        
+        // Array de colores para los corazones
+        const heartColors = [
+            "#ff4081", "#e91e63", "#c2185b", "#ad1457", 
+            "#880e4f", "#ff80ab", "#f50057", "#ff4081"
+        ];
+        
+        // Referencias a elementos del DOM
+        const heartsContainer = document.getElementById('heartsContainer');
+        const mainMessage = document.getElementById('mainMessage');
+        const addHeartsBtn = document.getElementById('addHeartsBtn');
+        const changeMessageBtn = document.getElementById('changeMessageBtn');
+        const explodeHeartsBtn = document.getElementById('explodeHeartsBtn');
+        const photoImage = document.getElementById('photoImage');
+        
+        // Variables para controlar los corazones
+        let hearts = [];
+        let heartCount = 0;
+        const maxHearts = 40;
+        let userPhoto = './mjose.jpeg'; // Ruta fija de la foto
+        
+        // Función para obtener un mensaje aleatorio
+        function getRandomMessage() {
+            return messages[Math.floor(Math.random() * messages.length)];
+        }
+        
+        // Función para obtener un color aleatorio
+        function getRandomColor() {
+            return heartColors[Math.floor(Math.random() * heartColors.length)];
+        }
+        
+        // Función para crear un corazón
+        function createHeart(x, y, isExplosion = false, includePhoto = false) {
+            // Limitar el número máximo de corazones
+            if (heartCount >= maxHearts && !isExplosion) {
+                // Eliminar el corazón más antiguo
+                const oldestHeart = hearts.shift();
+                if (oldestHeart && oldestHeart.element) {
+                    oldestHeart.element.remove();
+                    heartCount--;
+                }
+            }
+            
+            // Crear el elemento del corazón
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            
+            // Crear el mensaje del corazón
+            const message = document.createElement('div');
+            message.className = 'heart-message';
+            message.textContent = getRandomMessage();
+            
+            // Establecer color aleatorio
+            const color = getRandomColor();
+            heart.style.setProperty('--heart-color', color);
+            
+            // Aplicar color al corazón con CSS personalizado
+            const styleId = `heart-style-${heartCount}`;
+            let styleElement = document.getElementById(styleId);
+            
+            if (!styleElement) {
+                styleElement = document.createElement('style');
+                styleElement.id = styleId;
+                styleElement.textContent = `
+                    .heart-${heartCount}::before, 
+                    .heart-${heartCount}::after {
+                        background-color: ${color} !important;
+                    }
+                `;
+                document.head.appendChild(styleElement);
+            }
+            
+            heart.classList.add(`heart-${heartCount}`);
+            
+            // Posición inicial
+            const posX = x || Math.random() * (window.innerWidth - 40);
+            const posY = y || Math.random() * (window.innerHeight - 40);
+            
+            heart.style.left = `${posX}px`;
+            heart.style.top = `${posY}px`;
+            
+            // Tamaño aleatorio para los corazones de explosión
+            if (isExplosion) {
+                const size = 20 + Math.random() * 40;
+                heart.style.width = `${size}px`;
+                heart.style.height = `${size}px`;
+                
+                // Ajustar posición del mensaje para corazones más grandes
+                message.style.marginTop = `${size + 5}px`;
+                message.style.fontSize = `${0.5 + size/80}rem`;
+            }
+            
+            // Añadir foto al corazón si está disponible y es apropiado
+            if (includePhoto && userPhoto && Math.random() > 0.6) {
+                heart.classList.add('heart-with-photo');
+                const heartPhoto = document.createElement('img');
+                heartPhoto.className = 'heart-photo';
+                heartPhoto.src = userPhoto;
+                heart.appendChild(heartPhoto);
+            }
+            
+            // Añadir el mensaje al corazón
+            heart.appendChild(message);
+            
+            // Añadir el corazón al contenedor
+            heartsContainer.appendChild(heart);
+            
+            // Velocidad aleatoria para el movimiento
+            const speedX = (Math.random() - 0.5) * 3;
+            const speedY = (Math.random() - 0.5) * 3;
+            
+            // Almacenar información del corazón
+            const heartObj = {
+                element: heart,
+                message: message,
+                x: posX,
+                y: posY,
+                speedX: speedX,
+                speedY: speedY,
+                width: parseInt(heart.style.width) || 40,
+                height: parseInt(heart.style.height) || 40,
+                hasPhoto: includePhoto && userPhoto && Math.random() > 0.6
+            };
+            
+            hearts.push(heartObj);
+            heartCount++;
+            
+            return heartObj;
+        }
+        
+        // Función para animar los corazones
+        function animateHearts() {
+            for (let i = 0; i < hearts.length; i++) {
+                const heart = hearts[i];
+                
+                // Actualizar posición
+                heart.x += heart.speedX;
+                heart.y += heart.speedY;
+                
+                // Rebotar en los bordes de la ventana
+                if (heart.x <= 0 || heart.x >= window.innerWidth - heart.width) {
+                    heart.speedX = -heart.speedX;
+                    heart.x = heart.x <= 0 ? 0 : window.innerWidth - heart.width;
+                    
+                    // Cambiar mensaje al rebotar (50% de probabilidad)
+                    if (Math.random() > 0.5) {
+                        heart.message.textContent = getRandomMessage();
+                    }
+                }
+                
+                if (heart.y <= 0 || heart.y >= window.innerHeight - heart.height) {
+                    heart.speedY = -heart.speedY;
+                    heart.y = heart.y <= 0 ? 0 : window.innerHeight - heart.height;
+                    
+                    // Cambiar mensaje al rebotar (50% de probabilidad)
+                    if (Math.random() > 0.5) {
+                        heart.message.textContent = getRandomMessage();
+                    }
+                }
+                
+                // Aplicar nueva posición
+                heart.element.style.left = `${heart.x}px`;
+                heart.element.style.top = `${heart.y}px`;
+                
+                // Efecto de flotación sutil
+                const floatEffect = Math.sin(Date.now() / 1000 + i) * 0.5;
+                heart.element.style.transform = `translateY(${floatEffect}px)`;
+            }
+            
+            // Continuar la animación
+            requestAnimationFrame(animateHearts);
+        }
+        
+        // Función para cambiar el mensaje principal
+        function changeMainMessage() {
+            mainMessage.textContent = getRandomMessage();
+            
+            // Efecto visual
+            mainMessage.style.transform = 'scale(1.05)';
+            mainMessage.style.backgroundColor = 'rgba(255, 182, 193, 0.9)';
+            
+            setTimeout(() => {
+                mainMessage.style.transform = 'scale(1)';
+                mainMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+            }, 300);
+        }
+        
+        // Función para crear una explosión de corazones
+        function createExplosion(x, y) {
+            const explosionCount = 12;
+            
+            for (let i = 0; i < explosionCount; i++) {
+                // Crear corazón con posición inicial en el punto de explosión
+                createHeart(x, y, true, true);
+            }
+            
+            // Eliminar corazones excedentes después de la explosión
+            setTimeout(() => {
+                while (hearts.length > maxHearts) {
+                    const oldHeart = hearts.shift();
+                    if (oldHeart && oldHeart.element) {
+                        oldHeart.element.remove();
+                        heartCount--;
+                    }
+                }
+            }, 1000);
+        }
+        
+        // Función para verificar si la imagen se cargó correctamente
+        function checkImageLoaded() {
+            // Verificar si la imagen se cargó correctamente
+            if (photoImage.complete && photoImage.naturalHeight !== 0) {
+                console.log("La foto de María José se cargó correctamente");
+            } else {
+                console.log("La foto no se pudo cargar, mostrando fallback");
+                document.getElementById('photoFallback').style.display = 'flex';
+            }
+        }
+        
+        // Función para actualizar corazones con foto
+        function updateHeartsWithPhoto() {
+            // Actualizar algunos corazones existentes para incluir la foto
+            const heartsToUpdate = Math.min(8, hearts.length);
+            
+            for (let i = 0; i < heartsToUpdate; i++) {
+                const heart = hearts[i];
+                if (!heart.hasPhoto && Math.random() > 0.5) {
+                    heart.element.classList.add('heart-with-photo');
+                    const heartPhoto = document.createElement('img');
+                    heartPhoto.className = 'heart-photo';
+                    heartPhoto.src = userPhoto;
+                    heart.element.appendChild(heartPhoto);
+                    heart.hasPhoto = true;
+                }
+            }
+        }
+        
+        // Inicializar corazones al cargar la página
+        function init() {
+            // Verificar si la imagen se cargó
+            checkImageLoaded();
+            
+            // Crear corazones iniciales (algunos con foto)
+            for (let i = 0; i < 10; i++) {
+                createHeart(null, null, false, true);
+            }
+            
+            // Actualizar corazones con foto después de un breve tiempo
+            setTimeout(updateHeartsWithPhoto, 1000);
+            
+            // Iniciar animación
+            animateHearts();
+            
+            // Cambiar mensaje principal periódicamente
+            setInterval(changeMainMessage, 10000);
+        }
+        
+        // Event Listeners
+        addHeartsBtn.addEventListener('click', () => {
+            for (let i = 0; i < 4; i++) {
+                createHeart(null, null, false, true);
+            }
+        });
+        
+        changeMessageBtn.addEventListener('click', changeMainMessage);
+        
+        explodeHeartsBtn.addEventListener('click', () => {
+            // Crear explosión en el centro de la pantalla
+            createExplosion(window.innerWidth / 2, window.innerHeight / 2);
+        });
+        
+        // Crear corazón al hacer clic en cualquier parte de la página
+        document.addEventListener('click', (e) => {
+            createHeart(e.clientX, e.clientY, false, true);
+        });
+        
+        // Inicializar cuando se carga la página
+        window.addEventListener('load', init);
+        
+        // Ajustar corazones cuando cambia el tamaño de la ventana
+        window.addEventListener('resize', () => {
+            // Asegurarse de que los corazones no se salgan de los límites
+            for (let i = 0; i < hearts.length; i++) {
+                const heart = hearts[i];
+                
+                if (heart.x > window.innerWidth - heart.width) {
+                    heart.x = window.innerWidth - heart.width;
+                }
+                
+                if (heart.y > window.innerHeight - heart.height) {
+                    heart.y = window.innerHeight - heart.height;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
