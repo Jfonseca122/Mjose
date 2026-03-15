@@ -1,679 +1,438 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mensajes Especiales para María José</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
-            color: #7a1c3f;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-            z-index: 10;
-        }
-        
-        header {
-            padding: 20px 0;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(122, 28, 63, 0.2);
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
-            color: #d81b60;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: #880e4f;
-        }
-        
-        .photo-section {
-            margin: 20px auto;
-            padding: 15px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(122, 28, 63, 0.2);
-            max-width: 500px;
-        }
-        
-        .photo-section h2 {
-            margin-bottom: 15px;
-            color: #d81b60;
-        }
-        
-        .photo-container {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 5px solid #ff4081;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background-color: #f8bbd9;
-        }
-        
-        .photo-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .photo-fallback {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #880e4f;
-            font-size: 0.9rem;
-            background-color: #f8bbd9;
-        }
-        
-        .photo-fallback i {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            color: #ff4081;
-        }
-        
-        .love-message {
-            font-size: 1.4rem;
-            font-style: italic;
-            padding: 15px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            margin: 20px auto;
-            max-width: 800px;
-            box-shadow: 0 4px 10px rgba(122, 28, 63, 0.2);
-            transition: all 0.5s ease;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .controls {
-            margin: 20px 0;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 12px;
-            display: inline-block;
-            box-shadow: 0 4px 10px rgba(122, 28, 63, 0.2);
-            width: 100%;
-            max-width: 500px;
-        }
-        
-        .controls p {
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
-        
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        button {
-            background-color: #d81b60;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(216, 27, 96, 0.3);
-            width: 100%;
-        }
-        
-        button:hover {
-            background-color: #ad1457;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(216, 27, 96, 0.4);
-        }
-        
-        button:active {
-            transform: translateY(1px);
-        }
-        
-        .hearts-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 999;
-        }
-        
-        .heart {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            pointer-events: none;
-            filter: drop-shadow(0 0 8px rgba(255, 20, 147, 0.7));
-            opacity: 0.9;
-            transition: transform 0.2s ease;
-            z-index: 1000;
-        }
-        
-        .heart::before,
-        .heart::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 20px;
-            height: 32px;
-            background-color: #ff4081;
-            border-radius: 20px 20px 0 0;
-        }
-        
-        .heart::before {
-            left: 20px;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-        
-        .heart::after {
-            left: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-        
-        .heart-message {
-            position: absolute;
-            color: white;
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-align: center;
-            width: 80px;
-            margin-left: -20px;
-            margin-top: 45px;
-            text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
-            pointer-events: none;
-            z-index: 1001;
-        }
-        
-        .heart-with-photo {
-            border-radius: 50%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .heart-photo {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            object-fit: cover;
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            z-index: 3;
-            border: 2px solid white;
-        }
-        
-        footer {
-            margin-top: 25px;
-            padding: 15px;
-            color: #880e4f;
-            font-size: 0.8rem;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            display: inline-block;
-            width: 100%;
-            max-width: 500px;
-        }
-        
-        @media (min-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
-            header {
-                padding: 30px 0;
-                border-radius: 20px;
-                margin-bottom: 30px;
-            }
-            
-            h1 {
-                font-size: 2.8rem;
-            }
-            
-            .subtitle {
-                font-size: 1.5rem;
-            }
-            
-            .photo-section {
-                padding: 20px;
-                max-width: 600px;
-            }
-            
-            .photo-container {
-                width: 220px;
-                height: 220px;
-            }
-            
-            .love-message {
-                font-size: 1.8rem;
-                padding: 20px;
-                border-radius: 15px;
-                margin: 30px auto;
-                min-height: 100px;
-            }
-            
-            .controls {
-                padding: 20px;
-                border-radius: 15px;
-                max-width: 600px;
-            }
-            
-            .buttons-container {
-                flex-direction: row;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            
-            button {
-                width: auto;
-                min-width: 180px;
-                margin: 0 5px;
-            }
-            
-            footer {
-                padding: 20px;
-                border-radius: 15px;
-                max-width: 600px;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para María José — JFonseca</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d0a0e;
+    color: #f5efe8;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  canvas#petals {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 80px 0 60px;
+    border-bottom: 1px solid rgba(220,180,140,0.15);
+  }
+
+  .hero-date {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c9a87a;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 12vw, 88px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+    color: #f5efe8;
+    letter-spacing: -1px;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.5s forwards;
+  }
+
+  .hero-name span { color: #c9a87a; }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: rgba(245,239,232,0.5);
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+  }
+
+  .rose-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin: 40px 0 0;
+    opacity: 0;
+    animation: fadeUp 1s 1.1s forwards;
+  }
+
+  .rose-divider::before,
+  .rose-divider::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+  }
+  .rose-divider::before { background: linear-gradient(90deg, transparent, #c9a87a); }
+  .rose-divider::after  { background: linear-gradient(90deg, #c9a87a, transparent); }
+
+  .rose-icon { font-size: 20px; }
+
+  section {
+    padding: 64px 0;
+    border-bottom: 1px solid rgba(220,180,140,0.1);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  section.visible { opacity: 1; transform: translateY(0); }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #c9a87a;
+    margin-bottom: 32px;
+  }
+
+  .carta p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    line-height: 1.9;
+    color: rgba(245,239,232,0.85);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .carta p em { color: #c9a87a; font-style: italic; }
+
+  .firma {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: #c9a87a;
+    margin-top: 40px;
+    text-align: right;
+  }
+
+  .poema {
+    border-left: 1px solid rgba(201,168,122,0.4);
+    padding-left: 32px;
+  }
+
+  .poema p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-style: italic;
+    line-height: 2;
+    color: rgba(245,239,232,0.8);
+    font-weight: 300;
+  }
+
+  .poema p + p { margin-top: 24px; }
+
+  .razones-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 500px) {
+    .razones-grid { grid-template-columns: 1fr; }
+  }
+
+  .razon-card {
+    border: 1px solid rgba(201,168,122,0.2);
+    padding: 24px 20px;
+    border-radius: 2px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .razon-card:hover { border-color: rgba(201,168,122,0.5); }
+
+  .razon-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-style: italic;
+    color: rgba(201,168,122,0.2);
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    line-height: 1;
+  }
+
+  .razon-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(245,239,232,0.8);
+    font-weight: 300;
+  }
+
+  .timeline { position: relative; padding-left: 32px; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, #c9a87a, rgba(201,168,122,0.1));
+  }
+
+  .tl-item { position: relative; margin-bottom: 44px; }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -30px; top: 6px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #c9a87a;
+    box-shadow: 0 0 0 3px rgba(201,168,122,0.15);
+  }
+
+  .tl-date {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c9a87a;
+    margin-bottom: 8px;
+  }
+
+  .tl-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: #f5efe8;
+    margin-bottom: 8px;
+  }
+
+  .tl-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: rgba(245,239,232,0.55);
+    line-height: 1.7;
+  }
+
+  .final {
+    text-align: center;
+    padding: 64px 0 0;
+  }
+
+  .final-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-style: italic;
+    color: rgba(245,239,232,0.6);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+
+  .final-heart { font-size: 24px; display: block; margin-top: 16px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
 </head>
 <body>
-    <div class="hearts-container" id="heartsContainer"></div>
-    
-    <div class="container">
-        <header>
-            <h1>💖 Para María José 💖</h1>
-            <p class="subtitle">Mensajes especiales con todo mi cariño</p>
-        </header>
-        
-        <main>
-            <div class="photo-section">
-                <h2>Tu foto especial</h2>
-                <div class="photo-container" id="photoContainer">
-                    <!-- La imagen se cargará desde mjose.jpeg en la misma carpeta -->
-                    <img id="photoImage" src="./mjose.jpeg" class="photo-image" alt="Foto de María José" 
-                         onerror="document.getElementById('photoFallback').style.display='flex';">
-                    <div id="photoFallback" class="photo-fallback" style="display:none;">
-                        <i>📷</i>
-                        <span>María José</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="love-message" id="mainMessage">
-                Eres una mujer increíble y mereces toda la felicidad del mundo.
-            </div>
-            
-            <div class="controls">
-                <p>Haz clic en los botones para interactuar:</p>
-                <div class="buttons-container">
-                    <button id="addHeartsBtn">Más corazones</button>
-                    <button id="changeMessageBtn">Nuevo mensaje</button>
-                    <button id="explodeHeartsBtn">¡Explosión de cariño!</button>
-                </div>
-            </div>
-        </main>
-        
-        <footer>
-            <p>Hecho con cariño para ti, María José. Eres especial 💕</p>
-        </footer>
-    </div>
 
-    <script>
-        // Array de mensajes de cariño y aliento (sin "te amo")
-        const messages = [
-            "Eres una mujer increíble",
-            "Tu sonrisa ilumina el día",
-            "Eres fuerte y capaz",
-            "Mereces todo lo mejor",
-            "Eres especial y única",
-            "Tu energía es contagiosa",
-            "Eres inteligente y sabia",
-            "Admiro tu fortaleza",
-            "Tu corazón es generoso",
-            "Eres suficiente tal como eres",
-            "Hoy será un gran día para ti",
-            "Todo saldrá bien, confía",
-            "Eres valiosa e importante",
-            "Tu presencia hace la diferencia",
-            "Gracias por ser como eres",
-            "Eres una persona maravillosa",
-            "Tu bondad inspira a otros",
-            "Eres capaz de lograr lo que te propongas",
-            "Tu luz brilla con intensidad",
-            "Eres admirada y respetada"
-        ];
-        
-        // Array de colores para los corazones
-        const heartColors = [
-            "#ff4081", "#e91e63", "#c2185b", "#ad1457", 
-            "#880e4f", "#ff80ab", "#f50057", "#ff4081"
-        ];
-        
-        // Referencias a elementos del DOM
-        const heartsContainer = document.getElementById('heartsContainer');
-        const mainMessage = document.getElementById('mainMessage');
-        const addHeartsBtn = document.getElementById('addHeartsBtn');
-        const changeMessageBtn = document.getElementById('changeMessageBtn');
-        const explodeHeartsBtn = document.getElementById('explodeHeartsBtn');
-        const photoImage = document.getElementById('photoImage');
-        
-        // Variables para controlar los corazones
-        let hearts = [];
-        let heartCount = 0;
-        const maxHearts = 40;
-        let userPhoto = './mjose.jpeg'; // Ruta fija de la foto
-        
-        // Función para obtener un mensaje aleatorio
-        function getRandomMessage() {
-            return messages[Math.floor(Math.random() * messages.length)];
-        }
-        
-        // Función para obtener un color aleatorio
-        function getRandomColor() {
-            return heartColors[Math.floor(Math.random() * heartColors.length)];
-        }
-        
-        // Función para crear un corazón
-        function createHeart(x, y, isExplosion = false, includePhoto = false) {
-            // Limitar el número máximo de corazones
-            if (heartCount >= maxHearts && !isExplosion) {
-                // Eliminar el corazón más antiguo
-                const oldestHeart = hearts.shift();
-                if (oldestHeart && oldestHeart.element) {
-                    oldestHeart.element.remove();
-                    heartCount--;
-                }
-            }
-            
-            // Crear el elemento del corazón
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            
-            // Crear el mensaje del corazón
-            const message = document.createElement('div');
-            message.className = 'heart-message';
-            message.textContent = getRandomMessage();
-            
-            // Establecer color aleatorio
-            const color = getRandomColor();
-            heart.style.setProperty('--heart-color', color);
-            
-            // Aplicar color al corazón con CSS personalizado
-            const styleId = `heart-style-${heartCount}`;
-            let styleElement = document.getElementById(styleId);
-            
-            if (!styleElement) {
-                styleElement = document.createElement('style');
-                styleElement.id = styleId;
-                styleElement.textContent = `
-                    .heart-${heartCount}::before, 
-                    .heart-${heartCount}::after {
-                        background-color: ${color} !important;
-                    }
-                `;
-                document.head.appendChild(styleElement);
-            }
-            
-            heart.classList.add(`heart-${heartCount}`);
-            
-            // Posición inicial
-            const posX = x || Math.random() * (window.innerWidth - 40);
-            const posY = y || Math.random() * (window.innerHeight - 40);
-            
-            heart.style.left = `${posX}px`;
-            heart.style.top = `${posY}px`;
-            
-            // Tamaño aleatorio para los corazones de explosión
-            if (isExplosion) {
-                const size = 20 + Math.random() * 40;
-                heart.style.width = `${size}px`;
-                heart.style.height = `${size}px`;
-                
-                // Ajustar posición del mensaje para corazones más grandes
-                message.style.marginTop = `${size + 5}px`;
-                message.style.fontSize = `${0.5 + size/80}rem`;
-            }
-            
-            // Añadir foto al corazón si está disponible y es apropiado
-            if (includePhoto && userPhoto && Math.random() > 0.6) {
-                heart.classList.add('heart-with-photo');
-                const heartPhoto = document.createElement('img');
-                heartPhoto.className = 'heart-photo';
-                heartPhoto.src = userPhoto;
-                heart.appendChild(heartPhoto);
-            }
-            
-            // Añadir el mensaje al corazón
-            heart.appendChild(message);
-            
-            // Añadir el corazón al contenedor
-            heartsContainer.appendChild(heart);
-            
-            // Velocidad aleatoria para el movimiento
-            const speedX = (Math.random() - 0.5) * 3;
-            const speedY = (Math.random() - 0.5) * 3;
-            
-            // Almacenar información del corazón
-            const heartObj = {
-                element: heart,
-                message: message,
-                x: posX,
-                y: posY,
-                speedX: speedX,
-                speedY: speedY,
-                width: parseInt(heart.style.width) || 40,
-                height: parseInt(heart.style.height) || 40,
-                hasPhoto: includePhoto && userPhoto && Math.random() > 0.6
-            };
-            
-            hearts.push(heartObj);
-            heartCount++;
-            
-            return heartObj;
-        }
-        
-        // Función para animar los corazones
-        function animateHearts() {
-            for (let i = 0; i < hearts.length; i++) {
-                const heart = hearts[i];
-                
-                // Actualizar posición
-                heart.x += heart.speedX;
-                heart.y += heart.speedY;
-                
-                // Rebotar en los bordes de la ventana
-                if (heart.x <= 0 || heart.x >= window.innerWidth - heart.width) {
-                    heart.speedX = -heart.speedX;
-                    heart.x = heart.x <= 0 ? 0 : window.innerWidth - heart.width;
-                    
-                    // Cambiar mensaje al rebotar (50% de probabilidad)
-                    if (Math.random() > 0.5) {
-                        heart.message.textContent = getRandomMessage();
-                    }
-                }
-                
-                if (heart.y <= 0 || heart.y >= window.innerHeight - heart.height) {
-                    heart.speedY = -heart.speedY;
-                    heart.y = heart.y <= 0 ? 0 : window.innerHeight - heart.height;
-                    
-                    // Cambiar mensaje al rebotar (50% de probabilidad)
-                    if (Math.random() > 0.5) {
-                        heart.message.textContent = getRandomMessage();
-                    }
-                }
-                
-                // Aplicar nueva posición
-                heart.element.style.left = `${heart.x}px`;
-                heart.element.style.top = `${heart.y}px`;
-                
-                // Efecto de flotación sutil
-                const floatEffect = Math.sin(Date.now() / 1000 + i) * 0.5;
-                heart.element.style.transform = `translateY(${floatEffect}px)`;
-            }
-            
-            // Continuar la animación
-            requestAnimationFrame(animateHearts);
-        }
-        
-        // Función para cambiar el mensaje principal
-        function changeMainMessage() {
-            mainMessage.textContent = getRandomMessage();
-            
-            // Efecto visual
-            mainMessage.style.transform = 'scale(1.05)';
-            mainMessage.style.backgroundColor = 'rgba(255, 182, 193, 0.9)';
-            
-            setTimeout(() => {
-                mainMessage.style.transform = 'scale(1)';
-                mainMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-            }, 300);
-        }
-        
-        // Función para crear una explosión de corazones
-        function createExplosion(x, y) {
-            const explosionCount = 12;
-            
-            for (let i = 0; i < explosionCount; i++) {
-                // Crear corazón con posición inicial en el punto de explosión
-                createHeart(x, y, true, true);
-            }
-            
-            // Eliminar corazones excedentes después de la explosión
-            setTimeout(() => {
-                while (hearts.length > maxHearts) {
-                    const oldHeart = hearts.shift();
-                    if (oldHeart && oldHeart.element) {
-                        oldHeart.element.remove();
-                        heartCount--;
-                    }
-                }
-            }, 1000);
-        }
-        
-        // Función para verificar si la imagen se cargó correctamente
-        function checkImageLoaded() {
-            // Verificar si la imagen se cargó correctamente
-            if (photoImage.complete && photoImage.naturalHeight !== 0) {
-                console.log("La foto de María José se cargó correctamente");
-            } else {
-                console.log("La foto no se pudo cargar, mostrando fallback");
-                document.getElementById('photoFallback').style.display = 'flex';
-            }
-        }
-        
-        // Función para actualizar corazones con foto
-        function updateHeartsWithPhoto() {
-            // Actualizar algunos corazones existentes para incluir la foto
-            const heartsToUpdate = Math.min(8, hearts.length);
-            
-            for (let i = 0; i < heartsToUpdate; i++) {
-                const heart = hearts[i];
-                if (!heart.hasPhoto && Math.random() > 0.5) {
-                    heart.element.classList.add('heart-with-photo');
-                    const heartPhoto = document.createElement('img');
-                    heartPhoto.className = 'heart-photo';
-                    heartPhoto.src = userPhoto;
-                    heart.element.appendChild(heartPhoto);
-                    heart.hasPhoto = true;
-                }
-            }
-        }
-        
-        // Inicializar corazones al cargar la página
-        function init() {
-            // Verificar si la imagen se cargó
-            checkImageLoaded();
-            
-            // Crear corazones iniciales (algunos con foto)
-            for (let i = 0; i < 10; i++) {
-                createHeart(null, null, false, true);
-            }
-            
-            // Actualizar corazones con foto después de un breve tiempo
-            setTimeout(updateHeartsWithPhoto, 1000);
-            
-            // Iniciar animación
-            animateHearts();
-            
-            // Cambiar mensaje principal periódicamente
-            setInterval(changeMainMessage, 10000);
-        }
-        
-        // Event Listeners
-        addHeartsBtn.addEventListener('click', () => {
-            for (let i = 0; i < 4; i++) {
-                createHeart(null, null, false, true);
-            }
-        });
-        
-        changeMessageBtn.addEventListener('click', changeMainMessage);
-        
-        explodeHeartsBtn.addEventListener('click', () => {
-            // Crear explosión en el centro de la pantalla
-            createExplosion(window.innerWidth / 2, window.innerHeight / 2);
-        });
-        
-        // Crear corazón al hacer clic en cualquier parte de la página
-        document.addEventListener('click', (e) => {
-            createHeart(e.clientX, e.clientY, false, true);
-        });
-        
-        // Inicializar cuando se carga la página
-        window.addEventListener('load', init);
-        
-        // Ajustar corazones cuando cambia el tamaño de la ventana
-        window.addEventListener('resize', () => {
-            // Asegurarse de que los corazones no se salgan de los límites
-            for (let i = 0; i < hearts.length; i++) {
-                const heart = hearts[i];
-                
-                if (heart.x > window.innerWidth - heart.width) {
-                    heart.x = window.innerWidth - heart.width;
-                }
-                
-                if (heart.y > window.innerHeight - heart.height) {
-                    heart.y = window.innerHeight - heart.height;
-                }
-            }
-        });
-    </script>
+<canvas id="petals"></canvas>
+
+<div class="wrap">
+
+  <div class="hero">
+    <p class="hero-date">6 de Febrero, 2025 — Hoy y Siempre</p>
+    <h1 class="hero-name">María <span>José</span></h1>
+    <p class="hero-sub">Una página para ti, desde mi corazón</p>
+    <div class="rose-divider"><span class="rose-icon">🌹</span></div>
+  </div>
+
+  <section id="s1">
+    <p class="section-label">Una carta para ti</p>
+    <div class="carta">
+      <p>María José,</p>
+      <p>Hay personas que entran en tu vida y lo cambian todo sin que te des cuenta. Tú eres una de ellas. Desde aquel <em>6 de febrero</em>, cuando te acompañé a cambiar tus zapatos, algo en mí supo que estaba frente a alguien distinto.</p>
+      <p>No sé si fue la forma en que te reíste, o cómo caminabas sin pretender nada. Solo sé que quería seguir estando cerca de ti. Y ese primer beso, fue el comienzo de todo.</p>
+      <p>Quiero que sepas que admiro profundamente <em>la mujer que eres</em>. Tu forma de ser. Tu fuerza. La manera en que te comportas conmigo, que no tiene precio. Contigo aprendí que el amor no es ruido — es presencia, es calma, es elegirte todos los días.</p>
+      <p>Esta página es para ti. Para que siempre que la abras, recuerdes cuánto significas.</p>
+      <p class="firma">Con todo,<br>JFonseca 🌹</p>
+    </div>
+  </section>
+
+  <section id="s2">
+    <p class="section-label">Un poema para María José</p>
+    <div class="poema">
+      <p>Eres la calma que no sabía que buscaba,<br>
+      el instante antes del primer beso,<br>
+      la madrugada que no quería terminar.</p>
+
+      <p>Eres fuerte de la manera más silenciosa,<br>
+      sin necesitar que el mundo lo sepa,<br>
+      y eso me enamora más que cualquier cosa.</p>
+
+      <p>En ti encontré lo que no tenía nombre:<br>
+      esa sensación de estar en el lugar correcto,<br>
+      en el momento exacto,<br>
+      contigo.</p>
+
+      <p>— JFonseca</p>
+    </div>
+  </section>
+
+  <section id="s3">
+    <p class="section-label">Por qué te amo</p>
+    <div class="razones-grid">
+      <div class="razon-card">
+        <span class="razon-num">I</span>
+        <p class="razon-text">Por la forma en que eres. No finges, no actúas — solo eres tú, y eso es suficiente para enamorarse.</p>
+      </div>
+      <div class="razon-card">
+        <span class="razon-num">II</span>
+        <p class="razon-text">Por cómo te comportas conmigo. Con ternura, con honestidad. Me haces sentir que valgo.</p>
+      </div>
+      <div class="razon-card">
+        <span class="razon-num">III</span>
+        <p class="razon-text">Por tu fortaleza. Cargas lo que sea con una elegancia que muy pocos tienen. Eso me inspira.</p>
+      </div>
+      <div class="razon-card">
+        <span class="razon-num">IV</span>
+        <p class="razon-text">Por los momentos contigo. Desde los zapatos hasta el Barranco — cada uno se graba en mí.</p>
+      </div>
+      <div class="razon-card">
+        <span class="razon-num">V</span>
+        <p class="razon-text">Porque contigo, las 2 de la madrugada se sienten como las horas más vivas del mundo.</p>
+      </div>
+      <div class="razon-card" style="border-color: rgba(201,168,122,0.35)">
+        <span class="razon-num">∞</span>
+        <p class="razon-text" style="font-style:italic; color: rgba(245,239,232,0.5)">Y por mil razones más que no caben en palabras.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="s4">
+    <p class="section-label">Nuestra historia</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <p class="tl-date">7 de Enero</p>
+        <p class="tl-title">El principio de todo</p>
+        <p class="tl-desc">Antes de que todo comenzara, ya algo estaba pasando. La vida nos ponía en el mismo camino.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-date">6 de Febrero — El primer día</p>
+        <p class="tl-title">Los zapatos y el comienzo</p>
+        <p class="tl-desc">Te acompañé a cambiar tus zapatos. Un plan sencillo que se convirtió en uno de los días más importantes de mi vida.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-date">2 de la madrugada</p>
+        <p class="tl-title">El primer beso</p>
+        <p class="tl-desc">Llegó Conchita. Y en ese instante, sin pensarlo demasiado, nos besamos. Una madrugada que no quiero olvidar.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-date">2 de Febrero — Barranco</p>
+        <p class="tl-title">La fiesta en Barranco</p>
+        <p class="tl-desc">Bailamos, reímos, nos perdimos en la noche del Barranco. Esos momentos contigo se sienten únicos.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="final" id="final">
+    <p class="final-quote">"Que cada vez que abras esta página, sepas que estoy pensando en ti."</p>
+    <p style="font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #c9a87a;">Con amor, JFonseca</p>
+    <span class="final-heart">🌹</span>
+  </div>
+
+</div>
+
+<script>
+const canvas = document.getElementById('petals');
+const ctx = canvas.getContext('2d');
+let W, H, petals = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+function Petal() {
+  this.reset = function() {
+    this.x = Math.random() * W;
+    this.y = -10;
+    this.size = Math.random() * 4 + 2;
+    this.speed = Math.random() * 0.6 + 0.3;
+    this.drift = (Math.random() - 0.5) * 0.4;
+    this.alpha = Math.random() * 0.4 + 0.1;
+    this.angle = Math.random() * Math.PI * 2;
+    this.spin = (Math.random() - 0.5) * 0.02;
+  };
+  this.reset();
+  this.y = Math.random() * H;
+}
+
+for (let i = 0; i < 60; i++) petals.push(new Petal());
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  petals.forEach(p => {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.angle);
+    ctx.globalAlpha = p.alpha;
+    ctx.fillStyle = '#c9a87a';
+    ctx.beginPath();
+    ctx.ellipse(0, 0, p.size * 1.5, p.size * 0.8, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    p.y += p.speed;
+    p.x += p.drift;
+    p.angle += p.spin;
+    if (p.y > H + 10) p.reset();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+const sections = document.querySelectorAll('section');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+sections.forEach(s => obs.observe(s));
+
+const finalEl = document.getElementById('final');
+const finalObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      finalEl.style.opacity = 1;
+    }
+  });
+}, { threshold: 0.2 });
+finalEl.style.opacity = 0;
+finalEl.style.transition = 'opacity 1s ease';
+finalObs.observe(finalEl);
+</script>
 </body>
 </html>
